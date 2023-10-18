@@ -1,51 +1,28 @@
-1) Configurer Filestream
-
-C:\Windows\SysWOW64
-
-SqlServerManager15.msc
-
-RC sur SQL SERVER SERVICES \ SqlServer (SQLEXPRESS)
-Propriétés
-Onglet FILESTREAM
-Cochez les 2 cases
-
-RC sur SQL SERVER SERVICES \ SqlServer (SQLEXPRESS)  
-restart
-
-
-2) Créer la BD
-
--- •○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•
---				Création de la BD
--- •○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•
-
-CREATE DATABASE Labo11
-GO
-USE Labo11
-GO
-
-EXEC sp_configure filestream_access_level, 2 RECONFIGURE
-
-ALTER DATABASE Labo11
-ADD FILEGROUP FG_Images CONTAINS FILESTREAM;
-GO
-ALTER DATABASE Labo11
-ADD FILE (
-	NAME = FG_Images,
-	FILENAME = 'C:\EspaceLabo\FG_Images'
-)
-TO FILEGROUP FG_Images
-GO
-
-
 2) Installation de Evolve Tool
 
 dotnet tool install --global Evolve.Tool 
 
+
+InitialCreate.sql   
+V1_0__CreationTables
+V1_1__InsertData
+
 3) Migration
 
-evolve migrate sqlserver -c "Data Source=.\SQLEXPRESS;Initial Catalog=Labo11;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False" -s Fruits -s Etudiants --target-version 1.4
+evolve migrate sqlserver -c "Data Source=.\SQLEXPRESS;Initial Catalog=LibrairieQuartier;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False" -s Livres -s Clienteles --target-version 1.1
+
+
+
+
+
 
 4) Scaffold
 
 dotnet ef dbcontext scaffold Name=Labo11 Microsoft.EntityFrameworkCore.SqlServer -o Models --context-dir Data --data-annotations --force
+
+
+
+
+
+
+LOCALHOST\SQLEXPRESS

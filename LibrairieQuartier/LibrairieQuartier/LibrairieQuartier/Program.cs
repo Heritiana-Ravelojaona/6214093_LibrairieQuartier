@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+//builder.Services.AddDbContext<Labo12Context>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("Labo11"));
+//    options.UseLazyLoadingProxies();
+//});
 
 var app = builder.Build();
 
